@@ -1,2 +1,0 @@
-Executing file: a.out
-yzwxv
