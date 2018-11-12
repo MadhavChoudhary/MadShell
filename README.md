@@ -3,17 +3,15 @@
 An alternative to Linux Bash shell written in C.
 
 ## Built-in Commands
-``
-cd \ 
-help \  
-exit \
-pwd \
-env \
-mkdir \ 
-rmdir \
-ls \
-cp \
-``
+cd  
+help    
+exit  
+pwd  
+env  
+mkdir  
+rmdir  
+ls  
+cp  
 
 ## Other Commands
 
