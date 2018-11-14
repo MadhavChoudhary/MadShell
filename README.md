@@ -3,15 +3,19 @@
 An alternative to Linux Bash shell written in C.
 
 ## Built-in Commands
-cd  
-help    
-exit  
-pwd  
-env  
-mkdir  
-rmdir  
-ls  
-cp  
+
+| Key/Command | Description |
+| ----------- | ----------- |
+| pwd | Full path to working directory |
+| ls | Short listing of directory |
+| ls -l | Long listing of directory |
+| cd | Change Directory |
+| cp [file] [newfile] | Copy file to file |
+| mkdir [dir] | Create new directory |
+| rmdir [dir] | Remove directory (only operates on empty directories ) |
+| help | Shows Help regarding the shell |
+| exit | Exit the shell |
+| env [var] [new value] | Sets the env variable to the new value | 
 
 ## Other Commands
 
