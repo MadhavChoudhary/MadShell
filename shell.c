@@ -14,7 +14,7 @@
 #include <signal.h> //for kill
 
 #define clear() printf("\033[H\033[J")
-
+//Greets the user
 void init_shell()
 {
     clear();
@@ -27,21 +27,21 @@ void init_shell()
     printf("********************************************\n");
     printf("********************************************\n");
     printf("\n\n\n");
-    // sleep(1);
 }
 
 /*GLOBAL VARIABLES*/
 int pipe_count=0, fd;
 static char* args[512];
 char *history_file;
-char input_buffer[1024];
+char input_buffer[1024];//Assume max size of input command is 1024 characters
 char *cmd_exec[100];
 int flag, len;
-char cwd[1024];
+char cwd[1024];//Assume max size of current working directory is 1024 characters
 int flag_pipe=1;
 int no_of_lines;
 int environmment_flag;
 
+//Signal handler for Ctrl+C keypress
 void sigintHandler(int sig_num)
 {
     signal(SIGINT, sigintHandler);
@@ -58,7 +58,7 @@ char his_var[2000];
 char *input_redirection_file;
 char *output_redirection_file;
 extern char** environ;
-int background;
+int background; //Notices if a process should be run in background or not
 
 // void fileprocess ()
 // {
@@ -117,6 +117,7 @@ int background;
 
 // }
 
+//FLushes all variables
 void clear_variables()
 {
     fd =0;
@@ -329,12 +330,13 @@ void parent_directory()
 //       }
 
 // }
-
+//Skips whitespaces
 static char* skipwhite(char* s)
 {
     while (isspace(*s)) ++s;
     return s;
 }
+//Tokenizes commands based on whitespace
 void mad_parse_commands(char *com_exec)
 {
     int m=1;
@@ -342,7 +344,7 @@ void mad_parse_commands(char *com_exec)
     while((args[m]=strtok(NULL," "))!=NULL)
         m++;
 }
-void mad_parse_i_o(char *cmd_exec)
+void mad_parse_i_o(char *cmd_exec)//Handles io redirection with the < and > symbols
 {
     char *io_token[100];
     char *new_cmd_exec1;
@@ -500,7 +502,7 @@ static int mad_execute(int input, int first, int last, char *cmd_exec)
 
     return mypipefd[0];
 }
-
+//Signatures of all functions
 int mad_cd(char **args);
 int mad_help(char **args);
 int mad_exit(char **args);
@@ -538,7 +540,6 @@ int mad_num_builtins() {
 */
 int mad_cd(char **args)
 {
-    // printf("Came here\n");
     char *h="/home";
     if(args[1]==NULL)
         chdir(h);
@@ -574,7 +575,7 @@ int mad_mkdir(char **args)
 
     return 1;
 }
-
+//Removes a directory or raises a perror
 int mad_rmdir(char **args)
 {
     if(args[1]==NULL) {
@@ -604,9 +605,9 @@ int mad_ls(char **args)
         if(args[1]!=NULL) {
 
             printf("————————————————————————\n");
-            printf("File Size: \t\t%llu bytes\n",fileStat.st_size);
-            printf("Number of Links: \t%d\n",fileStat.st_nlink);
-            printf("File inode: \t\t%llu\n",fileStat.st_ino);
+            printf("File Size: \t\t%lu bytes\n",fileStat.st_size);
+            printf("Number of Links: \t%ld\n",fileStat.st_nlink);
+            printf("File inode: \t\t%lu\n",fileStat.st_ino);
 
             printf("File Permissions: \t");
             printf( (S_ISDIR(fileStat.st_mode)) ? "d" : "-");
